@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: telegram-expense-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: BOT_TOKEN
+        value: 7872237058:AAF6ekSXjMPebnUe5h8wZRG_0ECo8uFFD20
