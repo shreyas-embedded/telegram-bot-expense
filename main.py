@@ -9,10 +9,13 @@ import json
 from google.oauth2.service_account import Credentials
 
 creds_info = json.loads(os.environ['GOOGLE_CREDS_JSON'])
-creds = Credentials.from_service_account_info(creds_info)
-gc = gspread.authorize(creds)
 # Set up Google Sheets API
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+scopes = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
+creds = Credentials.from_service_account_info(creds_info, scopes=scopes)
+gc = gspread.authorize(creds)
 # creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
 sheet = gspread.authorize(creds).open("Expenses").sheet1
 
