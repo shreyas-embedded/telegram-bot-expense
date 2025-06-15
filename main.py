@@ -24,7 +24,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN") or "7872237058:AAF6ekSXjMPebnUe5h8wZRG_0ECo8u
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
-    match = re.search(r'₹\s?(\d+(?:\.\d{1,2})?)', text)
+    match = re.search(r'(?:₹\s?)?(\d+(?:\.\d{1,2})?)', text)
     amount = match.group(1) if match else "0"
     store_match = re.search(r'at\s+(\w+)', text, re.IGNORECASE)
     store = store_match.group(1) if store_match else "Unknown"
