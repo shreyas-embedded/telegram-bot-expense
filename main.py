@@ -5,10 +5,15 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import json
+from google.oauth2.service_account import Credentials
 
+creds_info = json.loads(os.environ['GOOGLE_CREDS_JSON'])
+creds = Credentials.from_service_account_info(creds_info)
+gc = gspread.authorize(creds)
 # Set up Google Sheets API
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+# creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
 sheet = gspread.authorize(creds).open("Expenses").sheet1
 
 # Telegram bot token from environment or replace below
